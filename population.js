@@ -1,15 +1,15 @@
 const getBlogs=()=>{
     const xhr= new XMLHttpRequest();
-    xhr.open("GET" , "https://restcountries.com/v3/all");
+    xhr.open("GET" , "https://raw.githubusercontent.com/rvsp/restcountries-json-data/master/res-countries.json");
     xhr.responseType="json";
     xhr.onload = () => {
-        console.log(xhr.response);
         const blogs = xhr.response;
         let getPopulation = blogs.filter(blogs => blogs.population < 200000);
         console.log(getPopulation);
-        let populations = blogs.population;
-        var number = sum => sum.reduce((x,y) => x+y,0);
-        console.log(number(populations));
+        let totalPopulation = blogs.reduce((acc, cur) => acc + cur.population, 0);
+        
+        console.log("Total Population: ", totalPopulation);
+        
     };
     xhr.send();
     };
